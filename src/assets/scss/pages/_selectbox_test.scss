@@ -1,0 +1,6 @@
+#selectBoxTest {
+  .selectbox_wrap {
+    @include flex();
+    column-gap: 12px;
+  }
+}

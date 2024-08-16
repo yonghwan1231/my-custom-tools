@@ -1,0 +1,49 @@
+// .search_wrap {
+//   .selectbox_wrap {
+//     min-width: 128px;
+//   }
+// }
+
+.selectbox_wrap {
+  position: relative;
+  width: 100%;
+  min-width: 254px;
+  height: 24px;
+  cursor: pointer;
+  z-index: $z-selectbox;
+
+  .select_value {
+    padding-left: 8px;
+    @include flex(flex-start);
+    width: 100%;
+    height: 100%;
+    border: 1px solid #ccc;
+    .btn_open {
+      position: absolute;
+      top: 50%;
+      right: 8px;
+      transform: translate(0, -50%);
+    }
+  }
+
+  .value_list {
+    position: absolute;
+    bottom: 0;
+    transform: translate(0, calc(100% + 4px));
+    width: 100%;
+    max-height: 240px;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.15);
+    background-color: #fff;
+    overflow-y: auto;
+
+    li {
+      @include flex(flex-start);
+      padding-left: 8px;
+      height: 24px;
+
+      &.active {
+        background-color: #ffe984;
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+#dashboard {
+  header {
+    text-align: center;
+  }
+
+  section {
+    fieldset {
+      text-align: center;
+
+      legend {
+        padding: 0 12px;
+      }
+
+      a {
+        display: inline-block;
+        margin: 12px 0;
+      }
+    }
+  }
+}

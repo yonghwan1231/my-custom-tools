@@ -1,0 +1,51 @@
+.container {
+  margin: 0 auto;
+  padding: 24px;
+  max-width: 1200px;
+
+  & > header {
+    h1 {
+      font-size: 32px;
+    }
+  }
+}
+
+button,
+select,
+input,
+label {
+  cursor: pointer;
+}
+
+button,
+select,
+input[type='text'] {
+  outline: none;
+  border: 1px solid #ccc;
+  background-color: transparent;
+}
+
+button {
+  padding: 4px 8px;
+}
+
+select,
+input[type='text'] {
+  @include flex();
+  padding: 0 8px;
+  height: 24px;
+}
+
+input {
+  &.error {
+    background-color: rgba($color: red, $alpha: 0.2);
+  }
+}
+
+*:disabled {
+  background-color: #eee !important;
+}
+
+.hidden {
+  display: none;
+}

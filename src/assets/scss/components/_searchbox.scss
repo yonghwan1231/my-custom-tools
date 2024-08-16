@@ -1,0 +1,14 @@
+.searchbox_wrap {
+  @include flex();
+  margin-bottom: 32px;
+  column-gap: 8px;
+  input {
+    height: 28px;
+    align-items: stretch;
+  }
+  .selectbox_wrap {
+    min-width: unset;
+    max-width: 100px;
+    height: 28px;
+  }
+}
