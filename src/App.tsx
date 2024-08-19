@@ -1,5 +1,6 @@
 import './App.css'
 import { Routes, Route } from 'react-router-dom'
+import { AppProviders } from 'AppProviders'
 import {
   Dashboard,
   FileHandlerTest,
@@ -7,24 +8,34 @@ import {
   SelectBoxTest,
   FormHandlerTest,
   SearchBoxTest,
+  ReactQueryTest,
 } from '@pages'
 
-function App() {
+const App = () => {
   const routes = [
-    { path: '/', element: <Dashboard /> },
+    {
+      path: '/',
+      element: <Dashboard />,
+      children: [{ path: 'outlet', element: <SelectBoxTest /> }],
+    },
     { path: '/select-box', element: <SelectBoxTest /> },
     { path: '/file-handler', element: <FileHandlerTest /> },
     { path: '/modal-handler', element: <ModalHandlerTest /> },
     { path: '/form-handler', element: <FormHandlerTest /> },
     { path: '/search-box', element: <SearchBoxTest /> },
+    { path: '/react-query', element: <ReactQueryTest /> },
   ]
 
   return (
-    <Routes>
-      {routes.map((route, key) => (
-        <Route key={key} path={route.path} element={route.element} />
-      ))}
-    </Routes>
+    <AppProviders>
+      <Routes>
+        {routes.map(({ children, ...route }, key) => (
+          <Route key={key} {...route}>
+            {children?.map((children) => <Route key={key} {...children} />)}
+          </Route>
+        ))}
+      </Routes>
+    </AppProviders>
   )
 }
 

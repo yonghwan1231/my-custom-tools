@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
 
 export const Dashboard = () => {
   const pageList = [
@@ -7,6 +7,7 @@ export const Dashboard = () => {
     { name: 'useModalHandler', path: '/modal-handler' },
     { name: 'useFileHandler', path: '/file-handler' },
     { name: 'useFormHandler', path: '/form-handler' },
+    { name: 'useCustomQuery', path: '/react-query' },
   ]
 
   return (
@@ -24,6 +25,7 @@ export const Dashboard = () => {
           </ul>
         </fieldset>
       </section>
+      <Outlet />
     </main>
   )
 }

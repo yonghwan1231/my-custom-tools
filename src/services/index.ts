@@ -1,1 +1,1 @@
-export * from './useCustomAxios'
+export * from './weatherService'
