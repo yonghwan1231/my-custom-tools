@@ -1,8 +1,8 @@
-import { weatherService } from '@services'
+import { getWeaterData } from '@services'
+import { Suspense } from 'react'
 
-export const ReactQueryTest = () => {
-  const res = weatherService.getWeaterData()
-
+const ReactQueryTestLoaded = () => {
+  const res = getWeaterData()
   console.log(res)
 
   return (
@@ -15,3 +15,9 @@ export const ReactQueryTest = () => {
     </main>
   )
 }
+
+export const ReactQueryTest = () => (
+  <Suspense fallback={<div>이 페이지 전용 로딩창...</div>}>
+    <ReactQueryTestLoaded />
+  </Suspense>
+)

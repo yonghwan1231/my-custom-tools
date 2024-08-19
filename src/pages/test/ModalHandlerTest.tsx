@@ -1,9 +1,7 @@
 import { useModalHandler } from '@hooks'
 
 type TModalData = {
-  data1: string
-  data2: string
-  data3: string
+  [key: string]: string
 }
 
 export const ModalHandlerTest = () => {

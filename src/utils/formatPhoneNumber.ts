@@ -1,13 +1,7 @@
 export const formatPhoneNumber = (value: number | string) => {
   if (!value) return ''
   if (typeof value === 'number') value = value.toString()
-  const phoneNumber = value.replace(/-/g, '')
-  let formattedPhoneNumber = ''
-  for (let i = 0; i < phoneNumber.length; i++) {
-    if (i === 3 || i === 7) {
-      formattedPhoneNumber += '-'
-    }
-    formattedPhoneNumber += phoneNumber[i]
-  }
-  return formattedPhoneNumber
+  return value
+    .replace(/[^0-9]/g, '')
+    .replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')
 }

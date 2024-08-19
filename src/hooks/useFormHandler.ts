@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { formatPhoneNumber } from '@utils'
 import { validationRules } from '@constants'
 
 type TFormHandlerEvent = React.ChangeEvent<
@@ -35,9 +36,7 @@ export const useFormHandler = <T>(
         break
       }
       case 'phoneNumber': {
-        newValue = newValue
-          .replace(/[^0-9]/g, '')
-          .replace(/(\d{3})(\d{3,4})(\d{4})/, '$1-$2-$3')
+        newValue = formatPhoneNumber(newValue)
         break
       }
       case 'array': {
