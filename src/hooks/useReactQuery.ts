@@ -2,9 +2,13 @@ import axios, { AxiosRequestConfig, AxiosError } from 'axios'
 import { useQuery, useSuspenseQuery, useMutation } from '@tanstack/react-query'
 import { config, messages } from '@constants'
 
+type TAxiosOtions = AxiosRequestConfig & {
+  processor?: (data: unknown) => unknown
+}
+
 type TQueryOptions = { meta?: { messages?: { [key: number]: string } } }
 
-const customAxios = async (url: string, options: AxiosRequestConfig) => {
+const customAxios = async (url: string, options: TAxiosOtions) => {
   const isBaseUrl = options.baseURL !== undefined
   const baseURL = isBaseUrl ? options.baseURL : config.SERVER_URL
   const res = await axios.request({
@@ -12,10 +16,12 @@ const customAxios = async (url: string, options: AxiosRequestConfig) => {
     // withCredentials: true,
     ...options,
   })
-  return res.data
+
+  if (!options.processor) return res.data
+  else return options.processor(res.data)
 }
 
-export const useCustomQuery = (
+export const useReactQuery = <ResponseData>(
   url: string,
   options: AxiosRequestConfig,
   queryOptions?: any,
@@ -23,14 +29,14 @@ export const useCustomQuery = (
   if (options.method === 'GET') {
     const { suspense } = queryOptions
     const query = suspense ? useSuspenseQuery : useQuery
-    return query({
+    return query<ResponseData>({
       queryKey: [url],
       queryFn: () => customAxios(url, options),
       gcTime: Infinity,
       ...queryOptions,
     })
   } else {
-    return useMutation({
+    return useMutation<ResponseData>({
       mutationKey: [url],
       mutationFn: () => customAxios(url, options),
       gcTime: Infinity,
